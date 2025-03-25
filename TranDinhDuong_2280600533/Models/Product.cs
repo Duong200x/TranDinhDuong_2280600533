@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TranDinhDuong_2280600533.Models
 {
-    public class Product
+    public class Product 
     {
         [Key]
         public int Id { get; set; }
@@ -21,6 +21,7 @@ namespace TranDinhDuong_2280600533.Models
         public Category? Category { get; set; }
 
         // Collection of Product Images
-        public ICollection<ProductImage>? ProductImages { get; set; }
+        public ICollection<ProductImage>? Images { get; set; }
+        
     }
 }

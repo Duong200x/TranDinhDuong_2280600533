@@ -21,21 +21,13 @@
     </dl>
 </div>
 
-@if (Model.ProductImages != null && Model.ProductImages.Any())
+@if (Model.Images != null && Model.Images.Any())
 {
-    <h4>Product Images:</h4>
-    <div class="row">
-        @foreach (var image in Model.ProductImages)
-        {
-            <div class="col-md-3">
-                <img src="@image.ImageUrl" class="img-thumbnail" style="width:100%; height:auto;" alt="@Model.Name" />
-            </div>
-        }
-    </div>
+    <img src="@Model.Images.First().Url" alt="@Model.Name" width="200" height="200" />
 }
 else
 {
-    <p>No images available for this product.</p>
+    <p>No image available</p>
 }
 
 <p>

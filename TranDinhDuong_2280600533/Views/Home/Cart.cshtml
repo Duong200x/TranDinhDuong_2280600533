@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TranDinhDuong_2280600533.Models.CartItem>
+
+<h2>Giỏ hàng của bạn</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Hình ảnh</th>
+                <th>Sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (item.Product.Images != null && item.Product.Images.Any())
+                        {
+                            <img src="@item.Product.Images.First().Url" alt="@item.Product.Name" width="80" height="80" />
+                        }
+                        else
+                        {
+                            <span>Không có hình ảnh</span>
+                        }
+                    </td>
+                    <td>@item.Product.Name</td>
+                    <td>
+                        <form asp-action="UpdateQuantity" asp-controller="Cart" method="post">
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" />
+                            <button type="submit">Cập nhật</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="RemoveFromCart" asp-controller="Cart" method="post">
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <button type="submit" class="btn btn-danger">Xoá</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Giỏ hàng của bạn hiện không có sản phẩm.</p>
+}

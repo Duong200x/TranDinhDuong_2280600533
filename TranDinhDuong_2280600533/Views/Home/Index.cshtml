@@ -1,8 +1,42 @@
-﻿@{
+﻿@model IEnumerable<TranDinhDuong_2280600533.Models.Product>
+
+@{
     ViewData["Title"] = "Home Page";
+    int numOfQuantity = 1;  // Khởi tạo số lượng mặc định
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="py-2">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach (var item in Model)
+            {
+                <div class="col mb-5">
+                    <div class="card gap-3" style="width: 18rem">
+                        @if (item.Images != null && item.Images.Any())
+                        {
+                            <img src="@item.Images.First().Url" class="card-img-top" alt="Product Image" style="height: 300px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <img src="/images/no-image.png" class="card-img-top" alt="No Image Available" style="height: 300px; object-fit: cover;">
+                        }
+
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </h5>
+                            <div class="d-flex">
+                                <span>Price: </span>
+                                <p class="mx-3">@item.Price.ToString("#,##0") USD</p>
+                            </div>
+                            <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-productId="@item.Id"
+                               asp-route-quantity="@numOfQuantity">
+                                <button class="btn btn-outline-dark"> <i class="bi-cart-fill me-1"></i> Add to Cart</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
