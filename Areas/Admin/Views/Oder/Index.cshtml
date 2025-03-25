@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TranDinhDuong_2280600533.Models.Order>
+@{
+    ViewData["Title"] = "Quản Lý Đơn Hàng";
+}
+
+<h2>Quản Lý Đơn Hàng</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã đơn hàng</th>
+            <th>Khách hàng</th>
+            <th>Ngày đặt</th>
+            <th>Tổng tiền</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderNumber</td>
+                <td>@order.CustomerName</td>
+                <td>@order.OrderDate</td>
+                <td>@order.TotalAmount</td>
+                <td>
+                    <a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-id="@order.Id">Chi tiết</a> |
+                    <a asp-area="Admin" asp-controller="Order" asp-action="Delete" asp-route-id="@order.Id">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

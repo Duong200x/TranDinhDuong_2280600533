@@ -1,0 +1,17 @@
+﻿@model TranDinhDuong_2280600533.Models.Order
+@{
+    ViewData["Title"] = "Chi Tiết Đơn Hàng";
+}
+
+<h2>Chi Tiết Đơn Hàng</h2>
+
+<div>
+    <p><strong>Mã đơn hàng:</strong> @Model.OrderNumber</p>
+    <p><strong>Khách hàng:</strong> @Model.CustomerName</p>
+    <p><strong>Ngày đặt:</strong> @Model.OrderDate</p>
+    <p><strong>Tổng tiền:</strong> @Model.TotalAmount</p>
+    <!-- Hiển thị các thông tin chi tiết khác của đơn hàng -->
+</div>
+<p>
+    <a asp-area="Admin" asp-controller="Order" asp-action="Index">Trở lại danh sách</a>
+</p>

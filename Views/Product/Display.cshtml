@@ -1,0 +1,35 @@
+﻿@model TranDinhDuong_2280600533.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">ID</dt>
+        <dd class="col-sm-10">@Model.Id</dd>
+        <dt class="col-sm-2">Name</dt>
+        <dd class="col-sm-10">@Model.Name</dd>
+        <dt class="col-sm-2">Price</dt>
+        <dd class="col-sm-10">@Model.Price</dd>
+        <dt class="col-sm-2">Description</dt>
+        <dd class="col-sm-10">@Model.Description</dd>
+        <dt class="col-sm-2">Category</dt>
+        <dd class="col-sm-10">@Model.Category?.Name</dd>
+    </dl>
+</div>
+
+@if (Model.Images != null && Model.Images.Any())
+{
+    <img src="@Model.Images.First().Url" alt="@Model.Name" width="200" height="200" />
+}
+else
+{
+    <p>No image available</p>
+}
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</p>

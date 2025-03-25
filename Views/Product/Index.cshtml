@@ -1,0 +1,51 @@
+﻿@model IEnumerable<TranDinhDuong_2280600533.Models.Product>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "List Of Product";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Add" class="btn btn-primary">Add New Product</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>Action</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Description</td>
+                <td>
+                    <a asp-action="Display" asp-route-id="@item.Id" class="btn btn-info">View</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
