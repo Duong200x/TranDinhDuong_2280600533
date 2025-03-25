@@ -16,8 +16,11 @@ namespace TranDinhDuong_2280600533.Repositories
 
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            // Bao gồm thông tin Category nếu cần
-            return await _context.Products.Include(p => p.Category).ToListAsync();
+            return await _context.Products
+                .Include(p => p.Category) // Nếu cần Category
+                .Include(p => p.Images)   // Thêm dòng này để load danh sách ảnh
+                .ToListAsync();
+            ;
         }
 
         public async Task<Product> GetByIdAsync(int id)
@@ -25,7 +28,7 @@ namespace TranDinhDuong_2280600533.Repositories
             // Bao gồm Category và ProductImages nếu có
             return await _context.Products
                                  .Include(p => p.Category)
-                                 .Include(p => p.ProductImages)
+                                 .Include(p => p.Images)
                                  .FirstOrDefaultAsync(p => p.Id == id);
         }
 

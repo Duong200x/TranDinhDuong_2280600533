@@ -14,6 +14,11 @@ namespace TranDinhDuong_2280600533.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Order> Orders { get; set; }
+<<<<<<< HEAD
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+=======
+>>>>>>> dc6ad3aed38c4575237605cd2b0e7756b53b5f19
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

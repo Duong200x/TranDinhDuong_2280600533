@@ -18,6 +18,13 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore" Version="9.0.0" />
+<<<<<<< HEAD
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Oder\" />
+=======
+>>>>>>> dc6ad3aed38c4575237605cd2b0e7756b53b5f19
   </ItemGroup>
 
 </Project>

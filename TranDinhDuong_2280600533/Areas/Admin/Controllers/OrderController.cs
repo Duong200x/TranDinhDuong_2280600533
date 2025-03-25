@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+﻿
+=======
 ﻿using Microsoft.AspNetCore.Mvc;
 using TranDinhDuong_2280600533.Models;
 using TranDinhDuong_2280600533.Repositories;
@@ -51,3 +54,4 @@ namespace TranDinhDuong_2280600533.Areas.Admin.Controllers
         }
     }
 }
+>>>>>>> dc6ad3aed38c4575237605cd2b0e7756b53b5f19

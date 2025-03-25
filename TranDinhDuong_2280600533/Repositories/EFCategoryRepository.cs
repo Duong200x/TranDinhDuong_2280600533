@@ -33,7 +33,7 @@ namespace TranDinhDuong_2280600533.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error adding category");
+                _logger.LogError(ex, "Lỗi khi thêm danh mục.");
                 throw;
             }
         }
@@ -47,7 +47,7 @@ namespace TranDinhDuong_2280600533.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating category");
+                _logger.LogError(ex, "Lỗi khi cập nhật danh mục.");
                 throw;
             }
         }
@@ -65,7 +65,7 @@ namespace TranDinhDuong_2280600533.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting category");
+                _logger.LogError(ex, "Lỗi khi xóa danh mục.");
                 throw;
             }
         }
