@@ -1,0 +1,17 @@
+﻿@model TranDinhDuong_2280600533.Models.Product
+
+@{
+    ViewData["Title"] = "Xoá Sản phẩm";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>Bạn có chắc chắn muốn xoá sản phẩm: @Model.Name?</h4>
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Xoá</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>
