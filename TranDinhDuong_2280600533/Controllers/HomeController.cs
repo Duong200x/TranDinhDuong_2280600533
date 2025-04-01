@@ -117,6 +117,7 @@ namespace TranDinhDuong_2280600533.Controllers
 
         // ✅ Xử lý lỗi chung
         [Route("Home/Error")]
+        [HttpGet]  // Đảm bảo phương thức HTTP rõ ràng
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult GeneralError()
         {
@@ -129,6 +130,7 @@ namespace TranDinhDuong_2280600533.Controllers
 
         // ✅ Xử lý lỗi theo mã HTTP (404, 403, v.v.)
         [Route("Home/Error/{statusCode}")]
+        [HttpGet]  // Đảm bảo phương thức HTTP rõ ràng
         public IActionResult HandleStatusCode(int statusCode)
         {
             var errorViewModel = new ErrorViewModel

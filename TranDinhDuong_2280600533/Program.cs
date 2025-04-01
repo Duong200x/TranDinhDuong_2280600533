@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using TranDinhDuong_2280600533.Models;
 using TranDinhDuong_2280600533.Repositories;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,14 +12,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddDefaultTokenProviders()
-    .AddDefaultUI()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+// Cấu hình cookie cho Identity
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = $"/Identity/Account/Login";
-    options.LogoutPath = $"/Identity/Account/Logout";
-    options.LogoutPath = $"/Identity/Account/AccessDenied";
+    options.LoginPath = "/Identity/Account/Login";
+    options.LogoutPath = "/Identity/Account/Logout";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied"; // Đổi LogoutPath bị trùng
 });
 
 // Cấu hình session
@@ -39,11 +40,17 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
     });
+
 // Đăng ký các repository
 builder.Services.AddScoped<IProductRepository, EFProductRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<ICategoryRepository, EFCategoryRepository>();
-builder.Services.AddScoped<ICartRepository, CartRepository>();
+
+// Cấu hình Swagger (Swagger UI)
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Product API", Version = "v1" });
+});
 
 var app = builder.Build();
 
@@ -74,11 +81,12 @@ app.MapControllers();  // Ánh xạ tất cả API controllers
 // Định tuyến Razor Pages
 app.MapRazorPages();
 
-// Cấu hình các Endpoints cho Admin
-app.UseEndpoints(endpoints =>
+// Cấu hình Swagger UI
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    endpoints.MapControllerRoute(name: "Admin", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-    endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Product API V1");
+    options.RoutePrefix = string.Empty; // Đặt Swagger UI làm trang chính (optional)
 });
 
 // Chạy ứng dụng

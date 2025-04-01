@@ -4,12 +4,14 @@ using TranDinhDuong_2280600533.Repositories;
 
 namespace TranDinhDuong_2280600533.Controllers
 {
+    // Đảm bảo rằng URL của API là "api/products"
     [Route("api/products")]
     [ApiController]
     public class ProductApiController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
 
+        // Constructor
         public ProductApiController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
@@ -20,6 +22,7 @@ namespace TranDinhDuong_2280600533.Controllers
         public async Task<IActionResult> GetAll()
         {
             var products = await _productRepository.GetAllAsync();
+            // Trả về danh sách sản phẩm
             return Ok(products);
         }
 
@@ -30,9 +33,9 @@ namespace TranDinhDuong_2280600533.Controllers
             var product = await _productRepository.GetByIdAsync(id);
             if (product == null)
             {
-                return NotFound();
+                return NotFound(); // Nếu sản phẩm không tồn tại, trả về lỗi 404
             }
-            return Ok(product);
+            return Ok(product); // Trả về thông tin sản phẩm
         }
 
         // POST: api/products
@@ -42,9 +45,10 @@ namespace TranDinhDuong_2280600533.Controllers
             if (ModelState.IsValid)
             {
                 await _productRepository.AddAsync(product);
+                // Sau khi thêm sản phẩm mới, trả về thông tin sản phẩm và URL của nó
                 return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
             }
-            return BadRequest(ModelState);
+            return BadRequest(ModelState); // Nếu dữ liệu không hợp lệ, trả về lỗi 400
         }
 
         // PUT: api/products/{id}
@@ -53,17 +57,17 @@ namespace TranDinhDuong_2280600533.Controllers
         {
             if (id != product.Id)
             {
-                return BadRequest();
+                return BadRequest(); // Nếu id không khớp, trả về lỗi 400
             }
 
             var existingProduct = await _productRepository.GetByIdAsync(id);
             if (existingProduct == null)
             {
-                return NotFound();
+                return NotFound(); // Nếu sản phẩm không tồn tại, trả về lỗi 404
             }
 
             await _productRepository.UpdateAsync(product);
-            return NoContent();
+            return NoContent(); // Cập nhật thành công, không trả về nội dung
         }
 
         // DELETE: api/products/{id}
@@ -73,11 +77,11 @@ namespace TranDinhDuong_2280600533.Controllers
             var product = await _productRepository.GetByIdAsync(id);
             if (product == null)
             {
-                return NotFound();
+                return NotFound(); // Nếu sản phẩm không tồn tại, trả về lỗi 404
             }
 
             await _productRepository.DeleteAsync(id);
-            return NoContent();
+            return NoContent(); // Xóa thành công, không trả về nội dung
         }
     }
 }
